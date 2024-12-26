@@ -1,5 +1,6 @@
 @main def hello(): Unit =
-  adt() // Algebraic Data Types
+  //adt()
+  collections()
   println(msg)
 
 def msg = "I was compiled by Scala 3. :)"
