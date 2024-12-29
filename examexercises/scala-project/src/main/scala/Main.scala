@@ -3,7 +3,8 @@
   // collections()
   // highorder1()
   // highorder2()
-  lazyeval()
+  // lazyeval()
+  // typeparametrization()
   println(msg)
 
 def msg = "I was compiled by Scala 3. :)"
