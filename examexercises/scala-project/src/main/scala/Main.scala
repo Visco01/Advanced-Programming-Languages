@@ -5,7 +5,8 @@
   // highorder2()
   // lazyeval()
   // typeparametrization()
-  fboundedpolymorphism()
+  // fboundedpolymorphism()
+  exam()
   println(msg)
 
 def msg = "I was compiled by Scala 3. :)"
