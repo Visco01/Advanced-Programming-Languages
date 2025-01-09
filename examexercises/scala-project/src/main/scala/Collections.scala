@@ -18,9 +18,8 @@ def tail[A] : List[A] => List[A] =
 // negative, does not drop any elements.
 def drop[A](n: Int) : List[A] => List[A] =
   case Nil => List()
-  case x::xs => n match
-      case n if n <= 0 => x::xs
-      case _ => drop(n-1)(xs)
+  case x::xs if n <= 0 => x::xs
+  case x::xs => drop(n-1)(xs)
 
 // Compute the length of a list
 def length[A] : List[A] => Int =
