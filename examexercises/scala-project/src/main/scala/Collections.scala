@@ -30,7 +30,7 @@ def length[A] : List[A] => Int =
 def snoc[A](x:A, xs: List[A]) : List[A] =
   xs match
     case Nil => List(x)
-    case _ => xs:::(List(x))
+    case _ => xs:+x
 
 // Return a new list with ys at the end of list xs
 def append[A](xs: List[A], ys: List[A]) : List[A] = xs match
@@ -40,7 +40,7 @@ def append[A](xs: List[A], ys: List[A]) : List[A] = xs match
 // Return the reverse of the input list
 def reverse[A] : List[A] => List[A] =
   case Nil => List()
-  case x::xs => reverse(xs):::List(x)
+  case x::xs => reverse(xs):+x
 
 // Return the list of the elements that occur at odd positions
 def odds[A](xs: List[A]) : List[A] = xs match
@@ -52,13 +52,17 @@ def split[A] : List[A] => (List[A], List[A]) =
   case Nil => (List(), List())
   case xs => {
     val n = length(xs)
+    // Return n/2 elements of the input list
     def loop(c: Int, ys: List[A]): List[A] =
       ys match
         case Nil => List()
         case y::ys if c < n/2 => y::loop(c+1, ys)
-        case y::ys if c >= n/2 => Nil
+        case _ => Nil
+    // Return the first n/2 elements of the input list
     val first = loop(0, xs)
+    // Return the last n/2 elements of the input list
     var second = loop(0, drop(n/2)(xs))
+    // If n is odd, drop one more element from the second half
     second = if (n % 2 == 0) second else second:::drop(n-1)(xs)
     (first, second)
   }
@@ -91,7 +95,9 @@ def walk(w: List[Char], xs: List[Char]) : List[List[Char]] =
   xs match
     case Nil => List(w)
     case x::xs => x match
+        // If the current character is a space, start a new word
         case ' ' => w::walk(List(), xs)
+        // Otherwise, append the current character to the current word
         case _ => walk(snoc(x, w), xs)
 
 def collections(): Unit =
@@ -121,6 +127,7 @@ def collections(): Unit =
   println(odds(ints))
   println("split")
   println(split(List(1)))
+  println(split(ints))
   println("merge sort")
   println(msort((x: Int, y: Int) => x < y, reverse(ints)))
   println("words")
